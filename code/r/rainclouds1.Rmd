@@ -46,7 +46,8 @@ f1 <- raincloud_1x1_repmes(df_1x1, align_clouds = FALSE, alpha = .8)+
   theme_classic() +
   #ylim(-30,40) +
   scale_color_gradient(low="#b22222", high="#4682b4") +
-  scale_fill_gradient(low="#b22222", high="#4682b4")
+  scale_fill_gradient(low="#b22222", high="#4682b4") +
+  geom_abline(slope = 0, intercept = 0, color = "black")
 #scale_color_manual(values=c("#999999", "#E69F00"))
 
 #ggsave("Threshold_RepRainclouds_del2.png", width = 4, height = 4, dpi = 300)
@@ -96,7 +97,7 @@ patchwork + plot_annotation(
 ggsave("Psychometric.png", width = 8, height = 8, dpi = 300)
 ```
 
-
+Slope x Session
 
 ```{r}
 
@@ -118,12 +119,12 @@ figure_1x1_rm <- raincloud_1x1_repmes(df_1x1, align_clouds = FALSE)+
   scale_fill_gradient(low="#b22222", high="#4682b4")
 #scale_color_manual(values=c("#999999", "#E69F00"))
 
-ggsave("Slope_RepRainclouds_del2.png", width = 4, height = 4, dpi = 300)
+#ggsave("Slope_RepRainclouds_del2.png", width = 4, height = 4, dpi = 300)
 
 figure_1x1_rm
 ```
 
-
+Treshold x Session
 ```{r}
 
 df3 <- behavior %>%
@@ -158,7 +159,7 @@ figure_2x2_2.0 <- raincloud_2x2_repmes(df_2x2_2.0, spread_x_ticks = FALSE) +
   scale_fill_manual(values = c("#4682b4", "#b22222")) +
   theme(legend.position="bottom", legend.box = "horizontal")
   
-ggsave("Threshold_RepRainclouds_2x2.png", width = 6, height = 4, dpi = 300)
+#ggsave("Threshold_RepRainclouds_2x2.png", width = 6, height = 4, dpi = 300)
 
 figure_2x2_2.0
 
@@ -193,6 +194,7 @@ ggsave("Slope_RepRainclouds_2x2.png", width = 6, height = 4, dpi = 300)
 figure_2x2_2.0
 ```
 
+Slope
 
 ```{r}
 df_2x2_1.0 <- data_2x2(
@@ -222,7 +224,7 @@ p2 <- raincloud_2x2_repmes(df_2x2_1.0, spread_x_ticks = TRUE) +
 p2
 
 ```
-
+Threshold
 ```{r}
 df_2x2_1.0 <- data_2x2(
   array_1 = df3$Threshold_Intero_Del1,
@@ -264,6 +266,96 @@ ggsave("Overview.png", width = 8, height = 8, dpi = 300)
 
 ```
 
+Criterion
+```{r}
+df_2x2_1.0 <- data_2x2(
+  array_1 = df3$Criterion_Intero_Del1,
+  array_2 = df3$Criterion_Intero_Del2,
+  array_3 = df3$Criterion_Extero_Del1,
+  array_4 = df3$Criterion_Extero_Del2,
+  label_1 = 'Del 1',
+  label_2 = 'Del 2',
+  jit_distance = .05,
+  jit_seed = 321,
+  spread_x_ticks = TRUE)
+
+p1 <- raincloud_2x2_repmes(df_2x2_1.0, spread_x_ticks = TRUE) +
+  
+  scale_x_continuous(breaks=c(1,2,3,4),
+                     labels=c("InteroDel1", "InteroDel2", "ExteroDel1", "ExteroDel2"),
+                     limits=c(0, 5)) +
+  xlab("Conditions") +
+  ylab("Criterion") +
+  theme_classic()+ 
+  scale_color_manual(values = c("#4682b4", "#b22222")) +
+  scale_fill_manual(values = c("#4682b4", "#b22222")) +
+  theme(legend.position="none")+
+  ggtitle('A')+
+  geom_abline(slope = 0, intercept = 0, color = "black")
+
+p1
+```
+Accuracy
+```{r}
+df_2x2_1.0 <- data_2x2(
+  array_1 = df3$Accuracy_Intero_Del1,
+  array_2 = df3$Accuracy_Intero_Del2,
+  array_3 = df3$Accuracy_Extero_Del1,
+  array_4 = df3$Accuracy_Extero_Del2,
+  label_1 = 'Del 1',
+  label_2 = 'Del 2',
+  jit_distance = .05,
+  jit_seed = 321,
+  spread_x_ticks = TRUE)
+
+p1 <- raincloud_2x2_repmes(df_2x2_1.0, spread_x_ticks = TRUE) +
+  
+  scale_x_continuous(breaks=c(1,2,3,4),
+                     labels=c("InteroDel1", "InteroDel2", "ExteroDel1", "ExteroDel2"),
+                     limits=c(0, 5)) +
+  xlab("Conditions") +
+  ylab("Accuracy") +
+  theme_classic()+ 
+  scale_color_manual(values = c("#4682b4", "#b22222")) +
+  scale_fill_manual(values = c("#4682b4", "#b22222")) +
+  theme(legend.position="none")+
+  ggtitle('A')+
+  geom_abline(slope = 0, intercept = 0, color = "black")
+
+p1
+```
+ConfidenceRT
+```{r}
+df_2x2_1.0 <- data_2x2(
+  array_1 = df3$ConfidenceRT_Intero_Del1,
+  array_2 = df3$ConfidenceRT_Intero_Del2,
+  array_3 = df3$ConfidenceRT_Extero_Del1,
+  array_4 = df3$ConfidenceRT_Extero_Del2,
+  label_1 = 'Del 1',
+  label_2 = 'Del 2',
+  jit_distance = .05,
+  jit_seed = 321,
+  spread_x_ticks = TRUE)
+
+p1 <- raincloud_2x2_repmes(df_2x2_1.0, spread_x_ticks = TRUE) +
+  
+  scale_x_continuous(breaks=c(1,2,3,4),
+                     labels=c("InteroDel1", "InteroDel2", "ExteroDel1", "ExteroDel2"),
+                     limits=c(0, 5)) +
+  xlab("Conditions") +
+  ylab("ConfidenceRT") +
+  theme_classic()+ 
+  scale_color_manual(values = c("#4682b4", "#b22222")) +
+  scale_fill_manual(values = c("#4682b4", "#b22222")) +
+  theme(legend.position="none")+
+  ggtitle('A')+
+  geom_abline(slope = 0, intercept = 0, color = "black")
+
+p1
+```
+
+Dprime
+
 ```{r}
 df_2x2_1.0 <- data_2x2(
   array_1 = df3$dPrime_Intero_Del1,
@@ -291,7 +383,7 @@ p1 <- raincloud_2x2_repmes(df_2x2_1.0, spread_x_ticks = TRUE) +
 
 p1
 ```
-
+Decision RT 
 ```{r}
 df_2x2_1.0 <- data_2x2(
   array_1 = df3$DecisionRT_Intero_Del1,
@@ -319,7 +411,7 @@ p2 <- raincloud_2x2_repmes(df_2x2_1.0, spread_x_ticks = TRUE) +
 
 p2
 ```
-
+Confidence
 ```{r}
 df_2x2_1.0 <- data_2x2(
   array_1 = df3$Confidence_Intero_Del1,
@@ -347,7 +439,7 @@ p3 <- raincloud_2x2_repmes(df_2x2_1.0, spread_x_ticks = TRUE) +
 
 p3
 ```
-
+Combiplot
 ```{r}
 
 patchwork <- (p1 /p2 /p3) 
