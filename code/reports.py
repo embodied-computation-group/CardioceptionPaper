@@ -2,17 +2,20 @@ import papermill as pm
 import subprocess
 import os
 
-dataPath = 'Z:/MINDLAB2019_Visceral-Mind/1_VMP_aux/'
-reportPath = 'Z:/MINDLAB2019_Visceral-Mind/6_reports/'
-sub = os.listdir(dataPath)
+dataPath = 'C:/Users/au646069/ECG/1_VPN_aux/'
+reportPath = 'C:/Users/au646069/github/CardioceptionPaper/reports/'
+subList = os.listdir(dataPath)
 
-for sub in os.listdir(os.path.join(os.getcwd(), 'data')):
+for sub in subList:
 
-    pm.execute_notebook(
-       'Analyses.ipynb',
-       path + sub + '.ipynb',
-       parameters=dict(subject=sub)
-    )
+   try:
+      pm.execute_notebook(
+         'HeartRateDiscrimination.ipynb',
+         reportPath + sub + '.ipynb',
+         parameters=dict(subject=sub, path=dataPath)
+      )
 
-    command = f'jupyter nbconvert {path}{sub}.ipynb --output {path}{sub}_report.html --no-input'
-    subprocess.call(command)
+      command = f'jupyter nbconvert {reportPath}{sub}.ipynb --output {reportPath}{sub}_report.html --no-input --to html'
+      subprocess.call(command)
+   except:
+      print(f'Subject {sub} not found.')

@@ -10,8 +10,6 @@ def import_from_aux(localPath, serverPath):
     # HRD
     for sub in subList:
         if sub.startswith('sub'):
-            if not os.path.exists(f'{localPath}/{sub}/HRD/'):
-                os.makedirs(f'{localPath}{sub}/HRD/')
 
             file = [serverPath+f'{sub}/HRD/{sub[4:]}001_final.txt',
                     serverPath+f'{sub}/HRD/{sub[4:]}HRD_final.txt',
@@ -39,8 +37,6 @@ def import_from_aux(localPath, serverPath):
     # HRD - PPG signal_df
     for sub in subList:
         if sub.startswith('sub'):
-            if not os.path.exists(f'{localPath}{sub}/HRD/'):
-                os.makedirs(f'{localPath}{sub}/HRD/')
 
             file = [serverPath+f'{sub}/HRD/{sub[4:]}_signal.txt',
                     serverPath+f'{sub}/HRD/{sub[4:]}_signal.txt',
@@ -67,8 +63,6 @@ def import_from_aux(localPath, serverPath):
     # HRD - posteriors
     for sub in subList:
         if sub.startswith('sub'):
-            if not os.path.exists(f'{localPath}{sub}/HRD/'):
-                os.makedirs(f'{localPath}{sub}/HRD/')
 
             for cond in ['Intero_posterior.npy', 'Extero_posterior.npy']:
                 file = [serverPath+f'{sub}/HRD/{sub[4:]}{cond}',
@@ -95,8 +89,6 @@ def import_from_aux(localPath, serverPath):
     # HBC
     for sub in subList:
         if sub.startswith('sub'):
-            if not os.path.exists(f'{localPath}{sub}/HBC/'):
-                os.makedirs(f'{localPath}{sub}/HBC/')
 
             file = [serverPath+f'{sub}/HBC/{sub[4:]}002_final.txt',
                     serverPath+f'{sub}/HBC/{sub[4:]}HRD_final.txt',
@@ -123,8 +115,6 @@ def import_from_aux(localPath, serverPath):
     # HBC (PPG files)
     for sub in subList:
         if sub.startswith('sub'):
-            if not os.path.exists(f'{localPath}{sub}/HBC/'):
-                os.makedirs(f'{localPath}{sub}/HBC/')
 
             for i in range(6):
 
@@ -148,7 +138,6 @@ def import_from_aux(localPath, serverPath):
                                         copyfileobj(source, target)
                             except:
                                 print(f'{file[2]} not found')
-
 
     # HRD - Del 2
     for sub in subList:
