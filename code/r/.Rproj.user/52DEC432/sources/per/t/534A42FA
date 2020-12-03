@@ -1,0 +1,32 @@
+{
+    "id": "534A42FA",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1607023013206.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "expression": "bayes_behavior",
+        "caption": "bayes_behavior",
+        "totalObservations": 433,
+        "displayedObservations": 433,
+        "variables": 7,
+        "cacheKey": "66F51CE0",
+        "object": "bayes_behavior",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=bayes_behavior&cache_key=66F51CE0&max_cols=50",
+        "preview": 0
+    },
+    "folds": "",
+    "lastKnownWriteTime": 3833812771345611126,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1607023013206,
+    "read_only": false,
+    "read_only_alternatives": []
+}

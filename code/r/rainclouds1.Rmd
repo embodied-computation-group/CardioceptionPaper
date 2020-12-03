@@ -27,7 +27,7 @@ Threshold
 df <- behavior %>%
   select(-X1) %>%
   select(-HBC) %>%
-  filter(Session == "Del2") %>%
+  filter(Session == "Del1") %>%
   pivot_wider(names_from = "Modality", id_cols = "Subject",
               values_from = c("Accuracy","Confidence", "ConfidenceRT","Criterion",
                               "DecisionRT", "Slope", "Threshold", "dPrime", "TaskDuration"))

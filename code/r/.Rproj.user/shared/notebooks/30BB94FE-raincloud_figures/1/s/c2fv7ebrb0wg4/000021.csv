@@ -1,0 +1,8 @@
+"0",""
+"0",""
+"0","patchwork_plot <- (p3 + p4 + p5)"
+"0","patchwork_plot + plot_annotation("
+"0","  title = 'Type-I Performance',"
+"0"," # subtitle = 'These 3 plots will reveal yet-untold secrets about our beloved data-set',"
+"0","#  caption = 'Disclaimer: None of these plots are insightful'"
+"0",")"
