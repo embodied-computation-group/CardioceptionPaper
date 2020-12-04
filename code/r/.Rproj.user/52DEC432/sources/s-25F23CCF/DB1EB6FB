@@ -12,13 +12,13 @@
     "properties": {
         "expression": "all_behavior",
         "caption": "all_behavior",
-        "totalObservations": "415",
-        "displayedObservations": "415",
+        "totalObservations": "414",
+        "displayedObservations": "414",
         "variables": "15",
-        "cacheKey": "AA09C787",
+        "cacheKey": "B6C1A43B",
         "object": "all_behavior",
         "environment": "",
-        "contentUrl": "grid_resource/gridviewer.html?env=&obj=all_behavior&cache_key=AA09C787&max_cols=50",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=all_behavior&cache_key=B6C1A43B&max_cols=50",
         "preview": "0"
     },
     "folds": "",

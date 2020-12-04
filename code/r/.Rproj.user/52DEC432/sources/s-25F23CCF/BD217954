@@ -3,7 +3,7 @@
     "path": "~/github/CardioceptionPaper/code/r/raincloud_figures.Rmd",
     "project_path": "raincloud_figures.Rmd",
     "type": "r_markdown",
-    "hash": "263445875",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1607022297228.0,
@@ -12,8 +12,8 @@
     "properties": {
         "tempName": "Untitled1",
         "chunk_output_type": "inline",
-        "cursorPosition": "226,0",
-        "scrollLine": "218"
+        "cursorPosition": "20,0",
+        "scrollLine": "19"
     },
     "folds": "",
     "lastKnownWriteTime": 1607026708,

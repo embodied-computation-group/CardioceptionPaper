@@ -3,12 +3,28 @@
 "0","library(readr)"
 "0","library(tidyr)"
 "0","library(dplyr)"
+"2","
+Attaching package: ‘dplyr’
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+"
 "0","library(ggplot2)"
 "0","library(patchwork)"
 "0",""
 "0","if (!require(remotes)) {"
 "0","    install.packages(""remotes"")"
 "0","}"
+"2","Loading required package: remotes
+"
 "0","remotes::install_github('jorvlan/raincloudplots')"
 "2","Skipping install of 'raincloudplots' from a github remote, the SHA1 (b8dc7c0a) has not changed since last install.
   Use `force = TRUE` to force installation
