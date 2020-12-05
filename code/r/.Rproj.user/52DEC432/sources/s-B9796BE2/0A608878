@@ -1,0 +1,26 @@
+{
+    "id": "0A608878",
+    "path": "~/github/CardioceptionPaper/code/r/heatmap_plots.Rmd",
+    "project_path": "heatmap_plots.Rmd",
+    "type": "r_markdown",
+    "hash": "1426254729",
+    "contents": "",
+    "dirty": false,
+    "created": 1607085118196.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "tempName": "Untitled1",
+        "chunk_output_type": "inline",
+        "cursorPosition": "254,0",
+        "scrollLine": "222"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1607166755,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1607166755157,
+    "read_only": false,
+    "read_only_alternatives": []
+}

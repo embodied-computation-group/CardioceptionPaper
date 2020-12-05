@@ -1,0 +1,32 @@
+{
+    "id": "FCDC17FF",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1607085697108.0,
+    "source_on_save": false,
+    "relative_order": 6,
+    "properties": {
+        "expression": "corr_data",
+        "caption": "corr_data",
+        "totalObservations": "207",
+        "displayedObservations": "207",
+        "variables": "12",
+        "cacheKey": "3D6E7158",
+        "object": "corr_data",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=corr_data&cache_key=3D6E7158&max_cols=50",
+        "preview": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 2459013982189675876,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1607085697108,
+    "read_only": false,
+    "read_only_alternatives": []
+}
