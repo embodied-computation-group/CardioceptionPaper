@@ -1,0 +1,32 @@
+{
+    "id": "8E3961CD",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1607335893582.0,
+    "source_on_save": false,
+    "relative_order": 9,
+    "properties": {
+        "expression": "pval",
+        "caption": "pval",
+        "totalObservations": 13,
+        "displayedObservations": 13,
+        "variables": 13,
+        "cacheKey": "E0E9C9A5",
+        "object": "pval",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=pval&cache_key=E0E9C9A5&max_cols=50",
+        "preview": 0
+    },
+    "folds": "",
+    "lastKnownWriteTime": 101,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1607335893582,
+    "read_only": false,
+    "read_only_alternatives": []
+}

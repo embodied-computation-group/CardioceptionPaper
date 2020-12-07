@@ -12,13 +12,13 @@
     "properties": {
         "expression": "corr_data",
         "caption": "corr_data",
-        "totalObservations": "206",
-        "displayedObservations": "206",
-        "variables": "13",
-        "cacheKey": "28D5EDD1",
+        "totalObservations": "3",
+        "displayedObservations": "3",
+        "variables": "15",
+        "cacheKey": "525AAFFA",
         "object": "corr_data",
         "environment": "",
-        "contentUrl": "grid_resource/gridviewer.html?env=&obj=corr_data&cache_key=28D5EDD1&max_cols=50",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=corr_data&cache_key=525AAFFA&max_cols=50",
         "preview": "0"
     },
     "folds": "",

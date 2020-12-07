@@ -1,26 +1,26 @@
 {
-    "id": "0A608878",
-    "path": "~/github/CardioceptionPaper/code/r/heatmap_plots.Rmd",
-    "project_path": "heatmap_plots.Rmd",
+    "id": "56C87D36",
+    "path": "~/github/CardioceptionPaper/code/r/analyze_del2_bayes.Rmd",
+    "project_path": "analyze_del2_bayes.Rmd",
     "type": "r_markdown",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1607085118196.0,
+    "created": 1607164872695.0,
     "source_on_save": false,
-    "relative_order": 5,
+    "relative_order": 6,
     "properties": {
         "tempName": "Untitled1",
         "chunk_output_type": "inline",
-        "cursorPosition": "205,0",
-        "scrollLine": "203"
+        "cursorPosition": "24,0",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1607166755,
+    "lastKnownWriteTime": 1607166107,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1607166755157,
+    "last_content_update": 1607166107987,
     "read_only": false,
     "read_only_alternatives": []
 }
