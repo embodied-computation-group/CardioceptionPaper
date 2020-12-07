@@ -1,0 +1,115 @@
+Notebook to analyze cross-modal correlations
+
+```{r}
+## setup
+Sys.setenv(LANG = "en")
+library(readr)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+
+if (!require(remotes)) {
+    install.packages("remotes")
+}
+remotes::install_github('jorvlan/raincloudplots')
+
+library(raincloudplots)
+
+## some data wrangling to get all the parameters together
+data_dir <- "~/github/CardioceptionPaper/data"
+
+behavior <- read_csv("~/github/CardioceptionPaper/data/behavior.txt")
+
+bayes_behavior <- read_csv("~/github/CardioceptionPaper/data/bayesianPsychophysic.txt")
+
+metacog_behavior <- read_csv("~/github/CardioceptionPaper/data/metadprim_indiv.txt")
+
+## transform data 
+behavior <- behavior %>%
+  dplyr::select(-matches(c("Threshold", "Slope", "X1"))) %>%
+  rename(Condition = Modality) %>%
+  filter(Session == "Del1") %>%
+  dplyr::select(-matches(c("Session")))
+  
+metacog_behavior <- metacog_behavior %>%
+  dplyr::select(matches(c("Mean", "Subject", "Condition"))) %>%
+  dplyr::select(-matches(c("mcse_mean", "ess"))) %>%
+  rename(Mratio = mean)
+
+all_behavior =full_join(behavior, bayes_behavior, by = c("Condition", "Subject"))
+
+all_behavior =full_join(all_behavior, metacog_behavior, by = c("Condition", "Subject"))
+
+all_behavior <- all_behavior %>%
+  na.omit(all_behavior) %>%
+  filter(X1 != 44)
+
+corr_data <- all_behavior %>%
+  dplyr::select(-matches(c("TaskDuration", "X1"))) %>%
+  pivot_wider(id_cols = Subject, names_from = Condition, values_from = c("dPrime", "DecisionRT", "BayesianThreshold", "BayesianSlope", "Confidence", "Mratio"))
+
+corr_data$HBC <- all_behavior$HBC[all_behavior$Condition == "Intero"]
+```
+
+```{r}
+
+
+a <- ggplot(corr_data, aes(x = BayesianThreshold_Intero, y = BayesianThreshold_Extero))+
+  geom_point()+
+#  ylim(5,20)+
+#  xlim(5,20) +
+  geom_smooth(method = "lm", se = TRUE)+
+  theme_minimal()
+
+b <- ggplot(corr_data, aes(x = BayesianSlope_Intero, y = BayesianSlope_Extero))+
+  geom_point()+
+#  ylim(5,20)+
+#  xlim(5,20) +
+  geom_smooth(method = "lm", se = TRUE)+
+  theme_minimal()
+
+c <- ggplot(corr_data, aes(x = dPrime_Intero, y = dPrime_Extero))+
+  geom_point()+
+#  ylim(5,20)+
+#  xlim(5,20) +
+  geom_smooth(method = "lm", se = TRUE)+
+  theme_minimal()
+
+d <- ggplot(corr_data, aes(x = DecisionRT_Intero, y = DecisionRT_Extero))+
+  geom_point()+
+#  ylim(5,20)+
+#  xlim(5,20) +
+  geom_smooth(method = "lm", se = TRUE)+
+  theme_minimal()
+
+
+
+e <- ggplot(corr_data, aes(x = Confidence_Intero, y = Confidence_Extero))+
+  geom_point()+
+#  ylim(5,20)+
+#  xlim(5,20) +
+  geom_smooth(method = "lm", se = TRUE)+
+  theme_minimal()
+
+f <- ggplot(corr_data, aes(x = Mratio_Intero, y = Mratio_Extero))+
+  geom_point()+
+#  ylim(5,20)+
+#  xlim(5,20) +
+  geom_smooth(method = "lm", se = TRUE)+
+  theme_minimal()
+
+
+patchwork_plot <- a + b + c + d + e + f 
+patchwork_plot + plot_annotation(
+  title = 'Cross-Modal Correlations',
+  subtitle = 'Plots of Type-I and Type-II decision making',
+
+)
+
+ggsave("intermodal_corr_all.pdf", height = 6, width = 12, dpi = 300)
+ggsave("intermodal_corr_all.png", height = 6, width = 12, dpi = 300)
+```
+
+
+

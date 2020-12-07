@@ -1,0 +1,32 @@
+{
+    "id": "40614711",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1607166888581.0,
+    "source_on_save": false,
+    "relative_order": 8,
+    "properties": {
+        "expression": "metacog_behavior",
+        "caption": "metacog_behavior",
+        "totalObservations": "426",
+        "displayedObservations": "426",
+        "variables": "5",
+        "cacheKey": "7E5FD84F",
+        "object": "metacog_behavior",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=metacog_behavior&cache_key=7E5FD84F&max_cols=50",
+        "preview": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 7810123700365321520,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1607166888581,
+    "read_only": false,
+    "read_only_alternatives": []
+}

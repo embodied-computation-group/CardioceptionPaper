@@ -1,0 +1,12 @@
+"0","metacog_behavior <- metacog_behavior %>%
+  dplyr::select(matches(c(""Mean"", ""Subject"", ""Condition""))) %>%
+  dplyr::select(-matches(c(""msce"", ""ess""))) %>% 
+
+ 
+
+
+all_behavior =full_join(behavior, bayes_behavior, by = c(""Condition"", ""Subject""))
+"
+"2","Error in metacog_behavior <- metacog_behavior %>% dplyr::select(matches(c(""Mean"",  : 
+  could not find function ""<-<-""
+"

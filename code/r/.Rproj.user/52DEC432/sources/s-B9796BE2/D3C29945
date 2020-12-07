@@ -1,0 +1,26 @@
+{
+    "id": "D3C29945",
+    "path": "~/github/CardioceptionPaper/code/r/analyze_intermodal_correlations.Rmd",
+    "project_path": "analyze_intermodal_correlations.Rmd",
+    "type": "r_markdown",
+    "hash": "0",
+    "contents": "",
+    "dirty": true,
+    "created": 1607166804057.0,
+    "source_on_save": false,
+    "relative_order": 7,
+    "properties": {
+        "tempName": "Untitled1",
+        "chunk_output_type": "inline",
+        "cursorPosition": "110,31",
+        "scrollLine": "96"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1607167092,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1607167765518,
+    "read_only": false,
+    "read_only_alternatives": []
+}
