@@ -39,7 +39,7 @@ def groupLevel(datapath, subjects, verbose=True):
 
                         beats.append(nRR)
                     df['Beats'] = beats
-                    hbc_score = ((df.Beats - df.Reported).abs() / ((df.Beats + df.Reported)/2)).mean()
+                    hbc_score = 1 - ((df.Beats - df.Reported).abs() / ((df.Beats + df.Reported)/2)).mean()
                 except:
                     hbc_score = np.nan
 
