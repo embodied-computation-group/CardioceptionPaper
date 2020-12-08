@@ -1,0 +1,123 @@
+```{r}
+Sys.setenv(LANG = "en")
+library(readr)
+library(tidyr)
+library(dplyr)
+library(psych)
+library(nFactors)
+library(ggplot2)
+library(corrplot)
+library(RColorBrewer)
+library(ltm)
+library(ggstatsplot)
+
+HRD_data_single_items <- read_csv("C:/Users/Micah Allen/Downloads/hrd_questionnaire_singleitem(1).csv")
+
+head(HRD_data_single_items)
+```
+
+```{r}
+task_data = HRD_data_single_items %>%
+  dplyr::select(matches(".bayes.")) %>%
+  mutate("diff_slope" = HRD_data_single_items$In_Slope_bayesian - HRD_data_single_items$Ex_Slope_bayesian) %>%
+  mutate("diff_thresh" = HRD_data_single_items$In_threshold_bayesian - HRD_data_single_items$Ex_threshold_bayesian)
+
+task_data$record_id <- HRD_data_single_items$record_id
+
+scales = HRD_data_single_items %>%
+  dplyr::select("asra_a_1":"wemwsb_16") %>%
+  dplyr::select(-matches("phq_9_10")) %>%
+  dplyr::select(-matches("mdq")) %>%
+  dplyr::select(-matches("pas")) %>%
+  dplyr::select(-matches("psqi"))%>%
+  dplyr::select(-matches("speq"))%>%
+  dplyr::select(-matches("phq15")) %>%
+  dplyr::select(matches(c("phq_9","stai", "mfi", "oci", "asr")))
+
+nanvars <- apply(is.na(scales), 2, which)
+
+# Determine Number of Factors to Extract
+
+ev <- eigen(cor(scales)) # get eigenvalues
+ap <- parallel(subject=nrow(scale),var=ncol(scales),
+  rep=100,cent=.05)
+nS <- nScree(x=ev$values, aparallel=ap$eigen$qevpea)
+plotnScree(nS) 
+
+
+```
+
+
+```{r}
+fa_fit <- fa(scales, nS$Components$nparalle)
+#nS$Components$nparalle
+
+loadings <- as.data.frame(fa_fit$scores)
+
+loadings$record_id <- HRD_data_single_items$record_id
+
+corr_mat = full_join(loadings, task_data, by ="record_id")
+
+corr_mat = dplyr::select(corr_mat, -record_id)
+
+
+weight <- as.data.frame(fa_fit$weights)
+
+pdf("./figs/diagram3.pdf", height = 12, width = 12)
+fa.diagram(fa_fit)
+dev.off()
+
+```
+
+```{r}
+
+ggstatsplot::ggcorrmat(
+  data = corr_mat, # data from which variable is to be taken
+#  cor.vars = lifeExp:gdpPercap, # specifying correlation matrix variables
+#  cor.vars.names = c(
+#    "Life Expectancy",
+#    "population",
+#    "GDP (per capita)"
+#  ),
+  type = "pearson", # which correlation coefficient is to be computed
+  lab.col = "red", # label color
+  ggtheme = ggplot2::theme_light(), # selected ggplot2 theme
+  ggstatsplot.layer = FALSE, # turn off default ggestatsplot theme overlay
+  matrix.type = "lower", # correlation matrix structure
+  colors = NULL, # turning off manual specification of colors
+  palette = "category10_d3", # choosing a color palette
+  package = "ggsci", # package to which color palette belongs
+  title = "Correlation matrix", # custom title
+ # subtitle = "Source: Gapminder Foundation" # custom subtitle
+)
+ggsave("./figs/corrmat.png",plot = last_plot(), dpi = 300, width = 10, height = 10)
+
+
+
+```
+```{r}
+####
+
+# for reproducibility
+set.seed(123)
+
+# plot
+ggstatsplot::ggscatterstats(
+  data = corr_mat,
+  x = diff_slope,
+  y = MR7,
+  type = "robust", # type of test that needs to be run
+  #xlab = "Movie budget (in million/ US$)", # label for x axis
+  #ylab = "IMDB rating", # label for y axis
+  #label.var = "title", # variable for labeling data points
+ # label.expression = "rating < 5 & budget > 100", # expression that decides which points to label
+#  title = "Movie budget and IMDB rating (action)", # title text for the plot
+  #caption = expression(paste(italic("Note"), ": IMDB stands for Internet Movie DataBase")),
+  ggtheme = hrbrthemes::theme_ipsum_ps(), # choosing a different theme
+  ggstatsplot.layer = FALSE, # turn off `ggstatsplot` theme layer
+  marginal.type = "density", # type of marginal distribution to be displayed
+  xfill = "pink", # color fill for x-axis marginal distribution
+  yfill = "#009E73" # color fill for y-axis marginal distribution
+)
+```
+

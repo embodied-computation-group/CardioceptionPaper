@@ -1,0 +1,214 @@
+Notebook to analyze cross-modal correlations
+
+```{r}
+## setup
+Sys.setenv(LANG = "en")
+library(readr)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(ggcorrplot)
+library(psych)
+library(tidyverse)  
+library(corrr)
+library(ggpubr)
+library(ggExtra)
+
+
+if (!require(remotes)) {
+    install.packages("remotes")
+}
+remotes::install_github('jorvlan/raincloudplots')
+
+library(raincloudplots)
+
+
+```
+data wrangling
+
+```{r}
+## some data wrangling to get all the parameters together
+data_dir <- "~/github/CardioceptionPaper/data"
+
+behavior <- read_csv("~/github/CardioceptionPaper/data/behavior.txt")
+
+bayes_behavior <- read_csv("~/github/CardioceptionPaper/data/bayesianPsychophysic.txt")
+
+metacog_behavior <- read_csv("~/github/CardioceptionPaper/data/metadprim_indiv.txt")
+
+## transform data 
+behavior <- behavior %>%
+  dplyr::select(-matches(c("Threshold", "Slope", "X1"))) %>%
+  rename(Condition = Modality) %>%
+  filter(Session == "Del1") %>%
+  dplyr::select(-matches(c("Session")))
+  
+metacog_behavior <- metacog_behavior %>%
+  dplyr::select(matches(c("Mean", "Subject", "Condition"))) %>%
+  dplyr::select(-matches(c("mcse_mean", "ess"))) %>%
+  rename(mPrime = mean) 
+
+all_behavior =full_join(behavior, bayes_behavior, by = c("Condition", "Subject"))
+
+all_behavior =full_join(all_behavior, metacog_behavior, by = c("Condition", "Subject"))
+
+all_behavior <- all_behavior %>%
+  na.omit(all_behavior) %>%
+  filter(X1 != 44)
+
+corr_data <- all_behavior %>%
+  dplyr::select(-matches(c("TaskDuration", "X1"))) %>%
+  mutate(mRatio = mPrime/dPrime)%>%
+  pivot_wider(id_cols = Subject, names_from = Condition, values_from = c("dPrime", "DecisionRT", "BayesianThreshold", "BayesianSlope", "Confidence", "mPrime", "mRatio"))
+
+corr_data$HBC <- all_behavior$HBC[all_behavior$Condition == "Intero"]
+
+corr_data <- corr_data %>%
+  filter(mRatio_Intero > 0) %>%
+  filter(mRatio_Extero > 0) %>%
+  mutate(log_mNatio_Intero = log(mRatio_Intero))%>%
+  mutate(log_mNatio_Extero = log(mRatio_Extero)) %>%
+  select(-matches(c("mRatio_Intero", "mRatio_Extero")))
+
+corr_data <- corr_data[, c(1:13, 15, 16, 14)]
+
+corr_data <- corr_data[,c(3,5,7,9,11,13,15,2,4,6,8,10,12,14, 16)] # rearrange data for correlation matrix
+```
+exploratory correlation matrix
+```{r}
+
+
+# fit correlation matrix
+
+pval <- psych::corr.test(corr_data, method = "pearson", adjust = "holm")$p
+
+# plot corrected map
+png(filename = "CorrelationHeatmapCorrected.png", res = 300, height = 8, width = 8, units = "in")
+
+a<-ggcorrplot(cor(corr_data, method = "pearson"), p.mat = pval, hc.order=FALSE, type='full', insig='blank', method = "circle", sig.level = 0.05, lab = FALSE)
+a
+dev.off()
+
+
+# plot uncorrected map
+
+pval <- psych::corr.test(corr_data, method = "pearson", adjust = "none")$p
+png(filename = "CorrelationHeatmapUnCorrected.png", res = 300, height = 8, width = 8, units = "in")
+
+ggcorrplot(cor(corr_data, method = "pearson"), hc.order=FALSE, type='full', method = "circle")
+
+dev.off()
+
+
+# uncorrected map
+#ggcorrplot(cor(corr_data, method = "pearson"), hc.order=FALSE, type='full', method = "square")
+
+
+```
+
+individual plots
+
+```{r}
+
+
+
+b <- ggplot(corr_data, aes(x = HBC, y = BayesianThreshold_Intero))+
+  geom_point()+
+#  ylim(5,20)+
+#  xlim(5,20) +
+  geom_smooth(method = "lm", se = TRUE)+
+  theme_minimal()+
+  scale_x_continuous(limits = c(0, 1.5)) +
+  ylab("Interoceptive Threshold (BPM)")+
+  xlab("Heartbeat Counting Accuracy")
+  
+b<-ggMarginal(b, xparams = list(fill = "gray", alpha = .5), yparams = list(fill = "gray", alpha = .5))
+
+b
+```
+
+```{r}
+patch <- (p1 | p2) / (p3 | p4)
+patch
+
+patchwork_plot <- a + patch
+patchwork_plot<-patchwork_plot + plot_annotation(
+  title = 'Fig. 5 Cross-Modal Pearson Correlations',
+  subtitle = 'Upper diagonal pHolm < 0.05. Lower diag p < 0.05 uncorrected. N = 207.'
+
+)
+
+#+ plot_layout(widths = c(2,1), heights = c(2,1))
+patchwork_plot
+ggsave(filename = "patchwork2.png", width = 12, height = 8, units = "in", dpi = 300)
+#png("patchworktest.png", width = 12, height = 8, units = "in", res = 300)
+#patchwork_plot
+#dev.off()
+
+```
+
+```{r}
+
+
+p1 <- ggplot(corr_data, aes(x = BayesianThreshold_Intero, y = BayesianThreshold_Extero))+
+  geom_point()+
+#  ylim(5,20)+
+#  xlim(5,20) +
+  geom_smooth(method = "lm", se = TRUE)+
+  theme_minimal()
+
+p2 <- ggplot(corr_data, aes(x = BayesianSlope_Intero, y = BayesianSlope_Extero))+
+  geom_point()+
+#  ylim(5,20)+
+#  xlim(5,20) +
+  geom_smooth(method = "lm", se = TRUE)+
+  theme_minimal()
+
+p3 <- ggplot(corr_data, aes(x = dPrime_Intero, y = dPrime_Extero))+
+  geom_point()+
+#  ylim(5,20)+
+#  xlim(5,20) +
+  geom_smooth(method = "lm", se = TRUE)+
+  theme_minimal()
+
+p4 <- ggplot(corr_data, aes(x = Confidence_Intero, y = Confidence_Extero))+
+  geom_point()+
+#  ylim(5,20)+
+#  xlim(5,20) +
+  geom_smooth(method = "lm", se = TRUE)+
+  #scale_x_continuous(limits = c(0,100)) +
+  #scale_y_continuous(limits = c(0,100))+
+  theme_minimal()
+
+
+
+e <- ggplot(corr_data, aes(x = Confidence_Intero, y = Confidence_Extero))+
+  geom_point()+
+#  ylim(5,20)+
+#  xlim(5,20) +
+  geom_smooth(method = "lm", se = TRUE)+
+  theme_minimal()
+
+f <- ggplot(corr_data, aes(x = Mratio_Intero, y = Mratio_Extero))+
+  geom_point()+
+#  ylim(5,20)+
+#  xlim(5,20) +
+  geom_smooth(method = "lm", se = TRUE)+
+  theme_minimal()
+
+
+patchwork_plot <- a + b + c + d + e + f 
+patchwork_plot + plot_annotation(
+  title = 'Cross-Modal Correlations',
+  subtitle = 'Plots of Type-I and Type-II decision making',
+
+)
+
+ggsave("intermodal_corr_all.pdf", height = 6, width = 12, dpi = 300)
+ggsave("intermodal_corr_all.png", height = 6, width = 12, dpi = 300)
+```
+
+
+
+

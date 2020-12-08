@@ -8,7 +8,7 @@
 "0","behavior <- read_csv(""~/github/CardioceptionPaper/data/behavior.txt"")"
 "2","Missing column names filled in: 'X1' [1]"
 "2","
-[36m--[39m [1m[1mColumn specification[1m[22m [36m--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------[39m
+[36m--[39m [1m[1mColumn specification[1m[22m [36m--------------------------------------------------------------------------------------------------------------------------------------------------------------------[39m
 cols(
   X1 = [32mcol_double()[39m,
   Accuracy = [32mcol_double()[39m,
@@ -30,7 +30,7 @@ cols(
 "0","bayes_behavior <- read_csv(""~/github/CardioceptionPaper/data/bayesianPsychophysic.txt"")"
 "2","Missing column names filled in: 'X1' [1]"
 "2","
-[36m--[39m [1m[1mColumn specification[1m[22m [36m--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------[39m
+[36m--[39m [1m[1mColumn specification[1m[22m [36m--------------------------------------------------------------------------------------------------------------------------------------------------------------------[39m
 cols(
   X1 = [32mcol_double()[39m,
   Subject = [31mcol_character()[39m,
@@ -44,9 +44,9 @@ cols(
 "
 "0","behavior <- behavior %>%"
 "0","  dplyr::select(-matches(c(""Threshold"", ""Slope"", ""X1""))) %>%"
-"0","  rename(Condition = Modality) %>%"
-"0","  filter(Session == ""Del1"") %>%"
-"0","  dplyr::select(-matches(c(""Session"")))"
+"0","  rename(Condition = Modality) #%>%"
+"0","#  filter(Session == ""Del2"") #%>%"
+"0","#  dplyr::select(-matches(c(""Session"")))"
 "0","  "
 "0",""
 "0"," "

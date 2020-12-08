@@ -1,0 +1,99 @@
+"0","## some data wrangling to get all the parameters together"
+"0","data_dir <- ""~/github/CardioceptionPaper/data"""
+"0",""
+"0","behavior <- read_csv(""~/github/CardioceptionPaper/data/behavior.txt"")"
+"2","Missing column names filled in: 'X1' [1]"
+"2","
+[36m--[39m [1m[1mColumn specification[1m[22m [36m--------------------------------------------------------------------------------------------------------------------------------------------------------------------[39m
+cols(
+  X1 = [32mcol_double()[39m,
+  Accuracy = [32mcol_double()[39m,
+  Confidence = [32mcol_double()[39m,
+  ConfidenceRT = [32mcol_double()[39m,
+  Criterion = [32mcol_double()[39m,
+  DecisionRT = [32mcol_double()[39m,
+  HBC = [32mcol_double()[39m,
+  Modality = [31mcol_character()[39m,
+  Session = [31mcol_character()[39m,
+  Slope = [32mcol_double()[39m,
+  Subject = [31mcol_character()[39m,
+  TaskDuration = [32mcol_double()[39m,
+  Threshold = [32mcol_double()[39m,
+  dPrime = [32mcol_double()[39m
+)
+
+"
+"0","bayes_behavior <- read_csv(""~/github/CardioceptionPaper/data/bayesianPsychophysic.txt"")"
+"2","Missing column names filled in: 'X1' [1]"
+"2","
+[36m--[39m [1m[1mColumn specification[1m[22m [36m--------------------------------------------------------------------------------------------------------------------------------------------------------------------[39m
+cols(
+  X1 = [32mcol_double()[39m,
+  Subject = [31mcol_character()[39m,
+  Condition = [31mcol_character()[39m,
+  Threshold = [32mcol_double()[39m,
+  Slope = [32mcol_double()[39m,
+  BayesianThreshold = [32mcol_double()[39m,
+  BayesianSlope = [32mcol_double()[39m
+)
+
+"
+"0","metacog_behavior <- read_csv(""~/github/CardioceptionPaper/data/metadprim_indiv.txt"")"
+"2","Missing column names filled in: 'X1' [1]"
+"2","
+[36m--[39m [1m[1mColumn specification[1m[22m [36m--------------------------------------------------------------------------------------------------------------------------------------------------------------------[39m
+cols(
+  X1 = [32mcol_double()[39m,
+  mean = [32mcol_double()[39m,
+  sd = [32mcol_double()[39m,
+  `hdi_3%` = [32mcol_double()[39m,
+  `hdi_97%` = [32mcol_double()[39m,
+  mcse_mean = [32mcol_double()[39m,
+  mcse_sd = [32mcol_double()[39m,
+  ess_mean = [32mcol_double()[39m,
+  ess_sd = [32mcol_double()[39m,
+  ess_bulk = [32mcol_double()[39m,
+  ess_tail = [32mcol_double()[39m,
+  r_hat = [33mcol_logical()[39m,
+  Subject = [31mcol_character()[39m,
+  Condition = [31mcol_character()[39m
+)
+
+"
+"0","## transform data "
+"0","behavior <- behavior %>%"
+"0","  dplyr::select(-matches(c(""Threshold"", ""Slope"", ""X1""))) %>%"
+"0","  rename(Condition = Modality) %>%"
+"0","  filter(Session == ""Del1"") %>%"
+"0","  dplyr::select(-matches(c(""Session"")))"
+"0","  "
+"0","metacog_behavior <- metacog_behavior %>%"
+"0","  dplyr::select(matches(c(""Mean"", ""Subject"", ""Condition""))) %>%"
+"0","  dplyr::select(-matches(c(""mcse_mean"", ""ess""))) %>%"
+"0","  rename(mPrime = mean) "
+"0",""
+"0","all_behavior =full_join(behavior, bayes_behavior, by = c(""Condition"", ""Subject""))"
+"0",""
+"0","all_behavior =full_join(all_behavior, metacog_behavior, by = c(""Condition"", ""Subject""))"
+"0",""
+"0","all_behavior <- all_behavior %>%"
+"0","  na.omit(all_behavior) %>%"
+"0","  filter(X1 != 44)"
+"0",""
+"0","corr_data <- all_behavior %>%"
+"0","  dplyr::select(-matches(c(""TaskDuration"", ""X1""))) %>%"
+"0","  mutate(mRatio = mPrime/dPrime)%>%"
+"0","  pivot_wider(id_cols = Subject, names_from = Condition, values_from = c(""dPrime"", ""DecisionRT"", ""BayesianThreshold"", ""BayesianSlope"", ""Confidence"", ""mPrime"", ""mRatio""))"
+"0",""
+"0","corr_data$HBC <- all_behavior$HBC[all_behavior$Condition == ""Intero""]"
+"0",""
+"0","corr_data <- corr_data %>%"
+"0","  filter(mRatio_Intero > 0) %>%"
+"0","  filter(mRatio_Extero > 0) %>%"
+"0","  mutate(log_mNatio_Intero = log(mRatio_Intero))%>%"
+"0","  mutate(log_mNatio_Extero = log(mRatio_Extero)) %>%"
+"0","  select(-matches(c(""mRatio_Intero"", ""mRatio_Extero"")))"
+"0",""
+"0","corr_data <- corr_data[, c(1:13, 15, 16, 14)]"
+"0",""
+"0","corr_data <- corr_data[,c(3,5,7,9,11,13,15,2,4,6,8,10,12,14, 16)] # rearrange data for correlation matrix"

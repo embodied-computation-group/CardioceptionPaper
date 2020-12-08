@@ -31,9 +31,9 @@ bayes_behavior <- read_csv("~/github/CardioceptionPaper/data/bayesianPsychophysi
 
 behavior <- behavior %>%
   dplyr::select(-matches(c("Threshold", "Slope", "X1"))) %>%
-  rename(Condition = Modality) %>%
-  filter(Session == "Del1") %>%
-  dplyr::select(-matches(c("Session")))
+  rename(Condition = Modality) #%>%
+#  filter(Session == "Del2") #%>%
+#  dplyr::select(-matches(c("Session")))
   
 
  
