@@ -3,16 +3,108 @@
 "0","library(readr)"
 "0","library(tidyr)"
 "0","library(dplyr)"
+"2","
+Attaching package: ‘dplyr’
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+"
 "0","library(ggplot2)"
 "0","library(patchwork)"
 "0","library(ggcorrplot)"
 "0","library(psych)"
+"2","
+Attaching package: ‘psych’
+
+"
+"2","The following objects are masked from ‘package:ggplot2’:
+
+    %+%, alpha
+
+"
 "0","library(tidyverse)  "
+"2","Registered S3 methods overwritten by 'dbplyr':
+  method         from
+  print.tbl_lazy     
+  print.tbl_sql      
+"
+"2","Found more than one class ""atomicVector"" in cache; using the first, from namespace 'Matrix'
+"
+"2","Also defined by ‘Rmpfr’
+"
+"2","Found more than one class ""atomicVector"" in cache; using the first, from namespace 'Matrix'
+"
+"2","Also defined by ‘Rmpfr’
+"
+"2","Found more than one class ""atomicVector"" in cache; using the first, from namespace 'Matrix'
+"
+"2","Also defined by ‘Rmpfr’
+"
+"2","Found more than one class ""atomicVector"" in cache; using the first, from namespace 'Matrix'
+"
+"2","Also defined by ‘Rmpfr’
+"
+"2","Found more than one class ""atomicVector"" in cache; using the first, from namespace 'Matrix'
+"
+"2","Also defined by ‘Rmpfr’
+"
+"2","Found more than one class ""atomicVector"" in cache; using the first, from namespace 'Matrix'
+"
+"2","Also defined by ‘Rmpfr’
+"
+"2","Found more than one class ""atomicVector"" in cache; using the first, from namespace 'Matrix'
+"
+"2","Also defined by ‘Rmpfr’
+"
+"2","Found more than one class ""atomicVector"" in cache; using the first, from namespace 'Matrix'
+"
+"2","Also defined by ‘Rmpfr’
+"
+"2","Found more than one class ""atomicVector"" in cache; using the first, from namespace 'Matrix'
+"
+"2","Also defined by ‘Rmpfr’
+"
+"2","Found more than one class ""atomicVector"" in cache; using the first, from namespace 'Matrix'
+"
+"2","Also defined by ‘Rmpfr’
+"
+"2","Found more than one class ""atomicVector"" in cache; using the first, from namespace 'Matrix'
+"
+"2","Also defined by ‘Rmpfr’
+"
+"2","Found more than one class ""atomicVector"" in cache; using the first, from namespace 'Matrix'
+"
+"2","Also defined by ‘Rmpfr’
+"
+"2","[37m-- [1mAttaching packages[22m ----------------------------------------------- tidyverse 1.3.0 --[39m
+"
+"2","[37m[32mv[37m [34mtibble [37m 3.0.4     [32mv[37m [34mstringr[37m 1.4.0
+[32mv[37m [34mpurrr  [37m 0.3.4     [32mv[37m [34mforcats[37m 0.5.0[39m
+"
+"2","[37m-- [1mConflicts[22m -------------------------------------------------- tidyverse_conflicts() --
+[31mx[37m [34mpsych[37m::[32m%+%()[37m    masks [34mggplot2[37m::%+%()
+[31mx[37m [34mpsych[37m::[32malpha()[37m  masks [34mggplot2[37m::alpha()
+[31mx[37m [34mdplyr[37m::[32mfilter()[37m masks [34mstats[37m::filter()
+[31mx[37m [34mdplyr[37m::[32mlag()[37m    masks [34mstats[37m::lag()[39m
+"
 "0","library(corrr)"
+"0","library(ggpubr)"
+"0","library(ggExtra)"
+"0",""
 "0",""
 "0","if (!require(remotes)) {"
 "0","    install.packages(""remotes"")"
 "0","}"
+"2","Loading required package: remotes
+"
 "0","remotes::install_github('jorvlan/raincloudplots')"
 "2","Skipping install of 'raincloudplots' from a github remote, the SHA1 (b8dc7c0a) has not changed since last install.
   Use `force = TRUE` to force installation

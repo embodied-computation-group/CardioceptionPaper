@@ -4,7 +4,7 @@
 "0","behavior <- read_csv(""~/github/CardioceptionPaper/data/behavior.txt"")"
 "2","Missing column names filled in: 'X1' [1]"
 "2","
-[36m--[39m [1m[1mColumn specification[1m[22m [36m--------------------------------------------------------------------------------------------------------------------------------------------------------------------[39m
+[36m--[39m [1m[1mColumn specification[1m[22m [36m-------------------------------------------------------------[39m
 cols(
   X1 = [32mcol_double()[39m,
   Accuracy = [32mcol_double()[39m,
@@ -26,7 +26,7 @@ cols(
 "0","bayes_behavior <- read_csv(""~/github/CardioceptionPaper/data/bayesianPsychophysic.txt"")"
 "2","Missing column names filled in: 'X1' [1]"
 "2","
-[36m--[39m [1m[1mColumn specification[1m[22m [36m--------------------------------------------------------------------------------------------------------------------------------------------------------------------[39m
+[36m--[39m [1m[1mColumn specification[1m[22m [36m-------------------------------------------------------------[39m
 cols(
   X1 = [32mcol_double()[39m,
   Subject = [31mcol_character()[39m,
@@ -41,7 +41,7 @@ cols(
 "0","metacog_behavior <- read_csv(""~/github/CardioceptionPaper/data/metadprim_indiv.txt"")"
 "2","Missing column names filled in: 'X1' [1]"
 "2","
-[36m--[39m [1m[1mColumn specification[1m[22m [36m--------------------------------------------------------------------------------------------------------------------------------------------------------------------[39m
+[36m--[39m [1m[1mColumn specification[1m[22m [36m-------------------------------------------------------------[39m
 cols(
   X1 = [32mcol_double()[39m,
   mean = [32mcol_double()[39m,
@@ -77,8 +77,8 @@ cols(
 "0","all_behavior =full_join(all_behavior, metacog_behavior, by = c(""Condition"", ""Subject""))"
 "0",""
 "0","all_behavior <- all_behavior %>%"
-"0","  na.omit(all_behavior) %>%"
-"0","  filter(X1 != 44)"
+"0","  na.omit(all_behavior) #%>%"
+"0","  #filter(X1 != 44)"
 "0",""
 "0","corr_data <- all_behavior %>%"
 "0","  dplyr::select(-matches(c(""TaskDuration"", ""X1""))) %>%"
@@ -92,8 +92,10 @@ cols(
 "0","  filter(mRatio_Extero > 0) %>%"
 "0","  mutate(log_mNatio_Intero = log(mRatio_Intero))%>%"
 "0","  mutate(log_mNatio_Extero = log(mRatio_Extero)) %>%"
+"0","  mutate(abs_Thresh_Intero = abs(BayesianThreshold_Intero))%>%"
+"0","  mutate(abs_Thresh_Extero = abs(BayesianThreshold_Extero))%>%"
 "0","  select(-matches(c(""mRatio_Intero"", ""mRatio_Extero"")))"
 "0",""
-"0","corr_data <- corr_data[, c(1:13, 15, 16, 14)]"
+"0","corr_data <- corr_data[, c(1:13, 15, 16, 17, 18, 14)]"
 "0",""
-"0","corr_data <- corr_data[,c(3,5,7,9,11,13,15,2,4,6,8,10,12,14, 16)] # rearrange data for correlation matrix"
+"0","corr_data <- corr_data[,c(3,5,7,9,11,13,15,17,2,4,6,8,10,12,14, 16, 18)] # rearrange data for correlation matrix"

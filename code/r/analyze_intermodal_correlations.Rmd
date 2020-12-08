@@ -54,8 +54,8 @@ all_behavior =full_join(behavior, bayes_behavior, by = c("Condition", "Subject")
 all_behavior =full_join(all_behavior, metacog_behavior, by = c("Condition", "Subject"))
 
 all_behavior <- all_behavior %>%
-  na.omit(all_behavior) %>%
-  filter(X1 != 44)
+  na.omit(all_behavior) #%>%
+  #filter(X1 != 44)
 
 corr_data <- all_behavior %>%
   dplyr::select(-matches(c("TaskDuration", "X1"))) %>%
@@ -69,11 +69,13 @@ corr_data <- corr_data %>%
   filter(mRatio_Extero > 0) %>%
   mutate(log_mNatio_Intero = log(mRatio_Intero))%>%
   mutate(log_mNatio_Extero = log(mRatio_Extero)) %>%
+  mutate(abs_Thresh_Intero = abs(BayesianThreshold_Intero))%>%
+  mutate(abs_Thresh_Extero = abs(BayesianThreshold_Extero))%>%
   select(-matches(c("mRatio_Intero", "mRatio_Extero")))
 
-corr_data <- corr_data[, c(1:13, 15, 16, 14)]
+corr_data <- corr_data[, c(1:13, 15, 16, 17, 18, 14)]
 
-corr_data <- corr_data[,c(3,5,7,9,11,13,15,2,4,6,8,10,12,14, 16)] # rearrange data for correlation matrix
+corr_data <- corr_data[,c(3,5,7,9,11,13,15,17,2,4,6,8,10,12,14, 16, 18)] # rearrange data for correlation matrix
 ```
 exploratory correlation matrix
 ```{r}
@@ -89,6 +91,10 @@ png(filename = "CorrelationHeatmapCorrected.png", res = 300, height = 8, width =
 a<-ggcorrplot(cor(corr_data, method = "pearson"), p.mat = pval, hc.order=FALSE, type='full', insig='blank', method = "circle", sig.level = 0.05, lab = FALSE)
 a
 dev.off()
+
+#cor(corr_data$abs_Thresh_Intero, corr_data$BayesianThreshold_Intero)
+#cor(corr_data$HBC, corr_data$BayesianThreshold_Intero)
+#cor(corr_data$HBC, corr_data$abs_Thresh_Intero)
 
 
 # plot uncorrected map
@@ -107,20 +113,76 @@ dev.off()
 
 ```
 
+```{r}
+p1 <- ggplot(corr_data, aes(x = HBC, BayesianThreshold_Intero))+
+  geom_point()+
+#  ylim(5,20)+
+#  xlim(5,20) +
+  geom_smooth(method = "lm", se = TRUE)+
+  theme_minimal()+
+  scale_x_continuous(limits = c(-.5, 1)) +
+  ylab("Interoceptive Threshold (Δ-BPM)")+
+  xlab("")+ 
+  stat_cor(label.x = -.5, label.y = 15, p.accuracy = 0.0001, r.accuracy = 0.01)#, aes(
+    #label = paste(..rr.label.., ..p.label.., sep = "~`,`~")
+   
+
+ # ))
+  
+#p1<-ggMarginal(p1, xparams = list(fill = "gray", alpha = .5), yparams = list(fill = "gray", alpha = .5))
+
+p1
+
+
+p2 <- ggplot(corr_data, aes(x = HBC, y = BayesianThreshold_Extero))+
+  geom_point()+
+#  ylim(5,20)+
+#  xlim(5,20) +
+  geom_smooth(method = "lm", se = TRUE)+
+  theme_minimal()+
+  scale_x_continuous(limits = c(-.5, 1)) +
+  scale_y_continuous(limits = c(-15, 20)) +
+  ylab("Exteroceptive Threshold (Δ-BPM)")+
+  xlab("Heartbeat Counting Accuracy (iACC)")+ 
+  stat_cor(label.x = -.5, label.y = 15, p.accuracy = 0.0001, r.accuracy = 0.01)
+           
+           
+           #, aes(
+    #label = paste(..rr.label.., ..p.label.., sep = "~`,`~")
+   
+
+  #))
+  
+#p2<-ggMarginal(p2, xparams = list(fill = "gray", alpha = .5), yparams = list(fill = "gray", alpha = .5))
+
+p2
+
+
+patch <- p1/p2
+
+patch <- patch +  plot_annotation(title = "Correlation between Heart Rate Discrimination and Heartbeat Counting",
+                                  subtitle = "n = 207")
+patch
+
+ggsave("HBC_analysis_1.png", units = "in", height = 6, width = 6, dpi = 300)
+
+```
+
+
 individual plots
 
 ```{r}
 
 
 
-b <- ggplot(corr_data, aes(x = HBC, y = BayesianThreshold_Intero))+
+b <- ggplot(corr_data, aes(x = HBC, y = abs(BayesianThreshold_Intero)))+
   geom_point()+
 #  ylim(5,20)+
 #  xlim(5,20) +
   geom_smooth(method = "lm", se = TRUE)+
   theme_minimal()+
-  scale_x_continuous(limits = c(0, 1.5)) +
-  ylab("Interoceptive Threshold (BPM)")+
+  scale_x_continuous(limits = c(-.5, 1)) +
+  ylab("Absolute Interoceptive Threshold (BPM)")+
   xlab("Heartbeat Counting Accuracy")
   
 b<-ggMarginal(b, xparams = list(fill = "gray", alpha = .5), yparams = list(fill = "gray", alpha = .5))
