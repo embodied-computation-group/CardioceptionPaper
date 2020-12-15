@@ -40,6 +40,7 @@ def groupLevel(datapath, subjects, verbose=True):
                         beats.append(nRR)
                     df['Beats'] = beats
                     hbc_score = 1 - ((df.Beats - df.Reported).abs() / ((df.Beats + df.Reported)/2)).mean()
+                    hbc_total = df.Reported.sum()
                 except:
                     hbc_score = np.nan
 
@@ -83,7 +84,8 @@ def groupLevel(datapath, subjects, verbose=True):
                                                 'ConfidenceRT': confidenceRT,
                                                 'dPrime': d,
                                                 'Criterion': c,
-                                                'HBC': hbc_score}, ignore_index=True)
+                                                'HBC': hbc_score,
+                                                'HBC_total': hbc_total}, ignore_index=True)
             except:
                 if verbose:
                     print(f'Subject: {sub} not found')

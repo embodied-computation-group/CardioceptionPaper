@@ -39,7 +39,7 @@ def raincloud(data, x, y, palette=['#4c72b0', '#c44e52'], ax=None, stripplot={},
     #########
     # Boxplot
     #########
-    sns.boxplot(data=df, width=0.1, notch=True, palette=palette, ax=ax, **boxplot)
+    sns.boxplot(data=df, width=0.1, notch=True, palette=palette, ax=ax, showfliers=False, **boxplot)
 
 
     ############
