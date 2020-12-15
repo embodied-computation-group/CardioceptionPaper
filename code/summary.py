@@ -3,6 +3,11 @@ import numpy as np
 from metadPy.sdt import rates, dprime, criterion
 from metadPy.utils import trials2counts, discreteRatings
 from systole.detection import rr_artefacts
+import os
+
+path = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
+datapath = 'C:/Users/au646069/ECG/1_VPN_aux/'
+subjects = os.listdir(datapath)
 
 
 def groupLevel(datapath, subjects, verbose=True):
@@ -15,6 +20,8 @@ def groupLevel(datapath, subjects, verbose=True):
     for session in ['Del1', 'Del2']:
         sess = '_del2' if session == 'Del2' else ''
         for sub in subjects:
+            hbc_score = np.nan
+            hbc_total = np.nan
             if session == 'Del1':
                 # Heart Beat Counting
                 try:
@@ -38,11 +45,12 @@ def groupLevel(datapath, subjects, verbose=True):
                             nRR -= n
 
                         beats.append(nRR)
-                    df['Beats'] = beats
+                    df[:, 'Beats'] = beats
                     hbc_score = 1 - ((df.Beats - df.Reported).abs() / ((df.Beats + df.Reported)/2)).mean()
                     hbc_total = df.Reported.sum()
                 except:
-                    hbc_score = np.nan
+                    if verbose:
+                        print(f'No HBC found for subject {sub}')
 
             # Heart Rate Discrimination
             try:
@@ -65,12 +73,9 @@ def groupLevel(datapath, subjects, verbose=True):
                     accuracy, confidence = this_df['ResponseCorrect'].mean() * 100, this_df['Confidence'].mean()
 
                     # SDT
-                    hit = sum((this_df.responseBPM > this_df.listenBPM) & (this_df[resp] == 'More'))
-                    miss = sum((this_df.responseBPM > this_df.listenBPM) & (this_df[resp] == 'Less'))
-                    fa = sum((this_df.responseBPM < this_df.listenBPM) & (this_df[resp] == 'More'))
-                    cr = sum((this_df.responseBPM < this_df.listenBPM) & (this_df[resp] == 'Less'))
-                    hr, far = rates(hit, miss, fa, cr)
-                    d, c = dprime(hr, far), criterion(hr, far)
+                    this_df.loc[:, 'stimuli'] = this_df.responseBPM > this_df.listenBPM
+                    this_df.loc[:, 'responses'] = this_df[resp] == 'More'
+                    d, c = this_df.dprime(), this_df.criterion()
 
                     group_df = group_df.append({'Subject': sub,
                                                 'Session': session,
@@ -103,7 +108,7 @@ def groupLevel(datapath, subjects, verbose=True):
                 if 'StartListening' in df.columns:
                     df = df.drop('StartListening', axis=1)
                 df['Subject'] = sub
-                df['Session'] = session 
+                df['Session'] = session
                 merged_df = merged_df.append(df, ignore_index=True)
             except:
                 if verbose:
