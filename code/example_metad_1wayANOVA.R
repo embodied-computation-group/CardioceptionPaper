@@ -21,7 +21,7 @@
 # nR_S1 and nR_S2 should be two lists of each nR_S1 or nR_S2 per task
 # model output is a large mcmc list and two vectors for d1 and c1
 #
-# Author: Nicolas Legrand nicolas.legrand@cfin.au.dk
+# Author: Nicolas Legrand (nicolas.legrand@cfin.au.dk)
 
 #####################################
 
@@ -37,7 +37,7 @@ library(ggpubr)
 library(ggmcmc)
 
 
-input = read.csv('nRS.txt')
+input = read.csv(file.path(dirname(getwd()), 'data/responsesRatings.txt'))
 subjects = unique(input$Subject)
 
 nR_S1_tot = list()
@@ -52,8 +52,6 @@ for (sub in subjects){
   nR_S1_tot[[length(nR_S1_tot) + 1]] <- nR_S1_cond
   nR_S2_tot[[length(nR_S2_tot) + 1]] <- nR_S2_cond
 }
-
-
 
 # Model -------------------------------------------------------------------
 
@@ -107,14 +105,13 @@ PlotCondition1
 
 df = rbind(data.frame(output[[1]]), data.frame(output[[2]]), data.frame(output[[3]]))
 
-write.table(df, file = 'posterior.txt', append = FALSE, sep = "\t", dec = ".",
-            row.names = TRUE, col.names = TRUE)
 
-write.table(stat, file = 'jagsStats.txt', append = FALSE, sep = "\t", dec = ".",
+
+write.table(stat, file = file.path(dirname(getwd()), 'data/jagsStats.txt'), append = FALSE, sep = "\t", dec = ".",
             row.names = TRUE, col.names = TRUE)
 
 jagsSamples <- mcmc.sample %>%
   filter(Parameter == "muBd_Condition1")
 
-write.table(jagsSamples, file = 'jagsSamples.txt', append = FALSE, sep = "\t", dec = ".",
+write.table(jagsSamples, file = file.path(dirname(getwd()), 'data/jagsSamples.txt'), append = FALSE, sep = "\t", dec = ".",
             row.names = TRUE, col.names = TRUE)

@@ -21,7 +21,7 @@
 # nR_S1 and nR_S2 should be two lists of each nR_S1 or nR_S2 per task
 # model output is a large mcmc list and two vectors for d1 and c1
 #
-# Author: Nicolas Legrand nicolas.legrand@cfin.au.dk
+# Author: Nicolas Legrand (nicolas.legrand@cfin.au.dk)
 
 #####################################
 
