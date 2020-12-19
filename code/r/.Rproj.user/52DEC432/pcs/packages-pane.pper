@@ -1,7 +1,0 @@
-{
-    "installOptions": {
-        "installFromRepository": true,
-        "libraryPath": "C:/Users/Micah Allen/Documents/R-4.0.3/library",
-        "installDependencies": true
-    }
-}

@@ -1,6 +1,0 @@
-"0",""
-"0",""
-"0","#ggsave(""threshold_raincloud.png"", height = 4, width = 4, dpi = 300)"
-"0","#ggsave(""threshold_raincloud.pdf"", height = 4, width = 4, dpi = 600)"
-"0",""
-"0","p1 <- raincloud_2"

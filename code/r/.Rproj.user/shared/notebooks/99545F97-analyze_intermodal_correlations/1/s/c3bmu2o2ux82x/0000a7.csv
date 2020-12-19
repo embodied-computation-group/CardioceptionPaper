@@ -1,7 +1,0 @@
-"0",""
-"0",""
-"0","patch <- p1/p2"
-"0",""
-"0","patch <- patch +  plot_annotation(title = ""Correlation between Heart Rate Discrimination and Heartbeat Counting"","
-"0","                                  subtitle = ""n = 207"")"
-"0","patch"
