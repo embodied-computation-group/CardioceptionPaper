@@ -27,7 +27,7 @@ Scripts and jupyter notebooks are tored in the `code` folder.
 
 ### Notebooks
 
-* `1 - Importing Files.ipynb` contains basic files import and summary.
+* | `1 - Importing Files.ipynb` | Contains basic files import and summary. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/embodied-computation-group/CardioceptionPaper/blob/main/code/1 - Importing Files.ipynb) | [![View the notebook](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.jupyter.org/github/embodied-computation-group/CardioceptionPaper/blob/main/code/1 - Importing Files.ipynb?flush_cache=true) |
 
 * `2 - Psychophysics.ipynb` description of the psychometric functions.
 
@@ -35,7 +35,9 @@ Scripts and jupyter notebooks are tored in the `code` folder.
 
 * `4 - Bayesian psychophysics.ipynb` Bayesian psychometric models.
 
-* `5 - Correlations.ipynb` Correlations between the HRD and the heartbeat counting task.
+* `5 - HBC quality check.ipynb` Controlling for correct heartbeats detection in PPG signal for the HBC task.
+
+* `6 - Correlations.ipynb` Correlations between the HRD and the heartbeat counting task.
 
 ### Scripts
 
