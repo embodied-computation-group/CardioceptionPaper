@@ -45,6 +45,7 @@ Scripts and jupyter notebooks are tored in the `code` folder.
 * `HeartBeatCounting.ipynb` Subject level report template for the heartbeat counting task. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/embodied-computation-group/CardioceptionPaper/blob/main/code/HeartBeatCounting.ipynb) | [![View the notebook](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.jupyter.org/github/embodied-computation-group/CardioceptionPaper/blob/main/code/HeartBeatCounting.ipynb?flush_cache=true) |
 
 * `HeartRateDiscrimination.ipynb` Subject level report template for the heart rate discrimination task. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/embodied-computation-group/CardioceptionPaper/blob/main/code/HeartRateDiscrimination.ipynb) | [![View the notebook](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.jupyter.org/github/embodied-computation-group/CardioceptionPaper/blob/main/code/HeartRateDiscrimination.ipynb?flush_cache=true) |
+
 ### Scripts
 
 #### Python
