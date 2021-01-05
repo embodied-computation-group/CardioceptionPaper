@@ -27,16 +27,24 @@ Scripts and jupyter notebooks are tored in the `code` folder.
 
 ### Notebooks
 
-* `1 - Importing Files.ipynb` contains basic files import and summary.
+#### Analysis
+* | `1-ImportingFiles.ipynb` | Contains basic files import and summary. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/embodied-computation-group/CardioceptionPaper/blob/main/code/1-ImportingFiles.ipynb) | [![View the notebook](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.jupyter.org/github/embodied-computation-group/CardioceptionPaper/blob/main/code/1-ImportingFiles.ipynb?flush_cache=true) |
 
-* `2 - Psychophysics.ipynb` description of the psychometric functions.
+* `2-Psychophysics.ipynb` description of the psychometric functions. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/embodied-computation-group/CardioceptionPaper/blob/main/code/2-Psychophysics.ipynb) | [![View the notebook](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.jupyter.org/github/embodied-computation-group/CardioceptionPaper/blob/main/code/2-Psychophysics.ipynb?flush_cache=true) |
 
-* `3 - Metacognition.ipynb` analysis of the type 2 task results.
+* `3-Metacognition.ipynb` analysis of the type 2 task results. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/embodied-computation-group/CardioceptionPaper/blob/main/code/3-Metacognition.ipynb) | [![View the notebook](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.jupyter.org/github/embodied-computation-group/CardioceptionPaper/blob/main/code/3-Metacognition.ipynb?flush_cache=true) |
 
-* `4 - Bayesian psychophysics.ipynb` Bayesian psychometric models.
+* `4-BayesianPsychophysics.ipynb` Bayesian psychometric models. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/embodied-computation-group/CardioceptionPaper/blob/main/code/4-BayesianPsychophysics.ipynb) | [![View the notebook](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.jupyter.org/github/embodied-computation-group/CardioceptionPaper/blob/main/code/4-BayesianPsychophysics.ipynb?flush_cache=true) |
 
-* `5 - Correlations.ipynb` Correlations between the HRD and the heartbeat counting task.
+* `5-HBC_QualityCheck.ipynb` Controlling for correct heartbeats detection in PPG signal for the HBC task. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/embodied-computation-group/CardioceptionPaper/blob/main/code/5-HBC_QualityCheck.ipynb) | [![View the notebook](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.jupyter.org/github/embodied-computation-group/CardioceptionPaper/blob/main/code/5-HBC_QualityCheck.ipynb?flush_cache=true) |
 
+* `6-Correlations.ipynb` Correlations between the HRD and the heartbeat counting task. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/embodied-computation-group/CardioceptionPaper/blob/main/code/6-Correlations.ipynb) | [![View the notebook](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.jupyter.org/github/embodied-computation-group/CardioceptionPaper/blob/main/code/6-Correlations.ipynb?flush_cache=true) |
+
+
+#### Templates
+* `HeartBeatCounting.ipynb` Subject level report template for the heartbeat counting task. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/embodied-computation-group/CardioceptionPaper/blob/main/code/HeartBeatCounting.ipynb) | [![View the notebook](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.jupyter.org/github/embodied-computation-group/CardioceptionPaper/blob/main/code/HeartBeatCounting.ipynb?flush_cache=true) |
+
+* `HeartRateDiscrimination.ipynb` Subject level report template for the heart rate discrimination task. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/embodied-computation-group/CardioceptionPaper/blob/main/code/HeartRateDiscrimination.ipynb) | [![View the notebook](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.jupyter.org/github/embodied-computation-group/CardioceptionPaper/blob/main/code/HeartRateDiscrimination.ipynb?flush_cache=true) |
 ### Scripts
 
 #### Python
