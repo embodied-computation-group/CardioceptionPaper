@@ -1,0 +1,7 @@
+nTrial,Reported,Condition,Duration,Confidence,ConfidenceRT
+0,17,Count,40,3,2.517
+1,30,Count,30,4,4.85
+2,23,Count,45,3,12.766
+3,39,Count,50,2,1.882
+4,30,Count,35,5,2.002
+5,15,Count,25,3,3.329
