@@ -1,0 +1,3 @@
+Subject,Modality,Threshold,Slope,BayesianThreshold,BayesianSlope
+sub_0019,Intero,6.828432514399762,18.290267996491245,13.872,18.717
+sub_0019,Extero,4.775693868601195,11.042193262779405,0.536,8.751
