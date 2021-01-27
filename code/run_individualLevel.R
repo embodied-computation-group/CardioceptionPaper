@@ -118,7 +118,8 @@ subjects = unique(input$Subject)
 
 # Loop across subject and conditions ------------------------------------
 df = data.frame(Subject=numeric(),
-                Condition=character(),
+                Modality=character(),
+                Session=character(),
                 MetadPrime=double(),
                 dPrime=double(),
                 HR=double(),
@@ -128,20 +129,24 @@ df = data.frame(Subject=numeric(),
                 stringsAsFactors = FALSE)
 
 
-for (sub in subjects){
   
-  for (cond in c("Extero", "Intero")){
+for (cond in c("Extero", "Intero")){
+  
+  for (session in c("Del1", "Del2")){
+
+    for (sub in unique(filter(input, Modality==cond, Session==session)$Subject)){
       
-    # Extract nR_S1 and nR_S1
-    nR_S1 = filter(input, Subject==sub, Condition==cond)$nR_S1
-    nR_S2 = filter(input, Subject==sub, Condition==cond)$nR_S2
-    
-    # Fit model - JAGS
-    Fit = metad_indiv(nR_S1, nR_S2)
-    
-    df[nrow(df) + 1,] = c(sub, cond, Fit$mean, Fit$d, Fit$ratingHR, Fit$ratingFAR, Fit$mratio, Fit$criterion)
+      # Extract nR_S1 and nR_S1
+      nR_S1 = filter(input, Subject==sub, Modality==cond, Session==session)$nR_S1
+      nR_S2 = filter(input, Subject==sub, Modality==cond, Session==session)$nR_S2
+      
+      # Fit model - JAGS
+      Fit = metad_indiv(nR_S1, nR_S2)
+      
+      df[nrow(df) + 1,] = c(sub, cond, session, Fit$mean, Fit$d, Fit$ratingHR, Fit$ratingFAR, Fit$mratio, Fit$criterion)
     }
+  }
 }
 
-write.table(df, file = 'metadprime.txt', append = FALSE, sep = "\t", dec = ".",
+write.table(df, file = file.path(dirname(getwd()), 'data/metadprimeHmetad.txt'), append = FALSE, sep = "\t", dec = ".",
             row.names = TRUE, col.names = TRUE)

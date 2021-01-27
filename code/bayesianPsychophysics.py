@@ -56,7 +56,7 @@ def singleSubject(this_df):
     return slope, threshold, bayesThreshold, bayesSlope
 
 
-for session in ['Del2']:
+for session in ['Del1']:
     
     merged_df = pd.read_csv(os.getcwd() + f'/{session}_merged.txt')
     merged_df = merged_df[~merged_df.Alpha.isnull()]
@@ -64,19 +64,17 @@ for session in ['Del2']:
     merged_df = merged_df[merged_df.HeartRateOutlier == 0]
 
     summary_df = pd.DataFrame([])
-    for subject in ['sub_0022']:
+    for subject in merged_df.Subject.unique():
 
         for modality in ['Intero', 'Extero']:
 
             this_df = merged_df[(merged_df.Subject == subject) & (merged_df.Modality == modality)]
 
-            # Drop first up/downtrials if incorrect to avoid contamination
-            this_df = this_df[~((this_df.Alpha.abs() == 40.5) & 
-                                (this_df.ResponseCorrect == 0) & 
-                                (this_df.StairCond != 'psi'))]
-
             # Drop trials with decision time < 100 ms
             this_df = this_df[~(this_df.DecisionRT < .1)]
+
+            # Remove HR outliers
+            this_df = this_df[this_df.HeartRateOutlier==0]
 
             slope, threshold, bayesThreshold, bayesSlope = singleSubject(this_df)
 

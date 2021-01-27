@@ -38,6 +38,8 @@ library(ggmcmc)
 
 
 input = read.csv(file.path(dirname(getwd()), 'data/responsesRatings.txt'))
+
+input = filter(input, Session=="Del2")
 subjects = unique(input$Subject)
 
 nR_S1_tot = list()
@@ -46,8 +48,8 @@ for (sub in subjects){
   nR_S1_cond = list()
   nR_S2_cond = list()
   for (cond in c('Intero', 'Extero')){
-    nR_S1_cond[[length(nR_S1_cond) + 1]] <- filter(input, Subject==sub, Condition==cond)$nR_S1
-    nR_S2_cond[[length(nR_S2_cond) + 1]] <- filter(input, Subject==sub, Condition==cond)$nR_S2
+    nR_S1_cond[[length(nR_S1_cond) + 1]] <- filter(input, Subject==sub, Modality==cond)$nR_S1
+    nR_S2_cond[[length(nR_S2_cond) + 1]] <- filter(input, Subject==sub, Modality==cond)$nR_S2
   }
   nR_S1_tot[[length(nR_S1_tot) + 1]] <- nR_S1_cond
   nR_S2_tot[[length(nR_S2_tot) + 1]] <- nR_S2_cond
@@ -107,11 +109,11 @@ df = rbind(data.frame(output[[1]]), data.frame(output[[2]]), data.frame(output[[
 
 
 
-write.table(stat, file = file.path(dirname(getwd()), 'data/jagsStats.txt'), append = FALSE, sep = "\t", dec = ".",
+write.table(stat, file = file.path(dirname(getwd()), 'data/jagsStats_Del1.txt'), append = FALSE, sep = "\t", dec = ".",
             row.names = TRUE, col.names = TRUE)
 
 jagsSamples <- mcmc.sample %>%
   filter(Parameter == "muBd_Condition1")
 
-write.table(jagsSamples, file = file.path(dirname(getwd()), 'data/jagsSamples.txt'), append = FALSE, sep = "\t", dec = ".",
+write.table(jagsSamples, file = file.path(dirname(getwd()), 'data/jagsSamples_Del1.txt'), append = FALSE, sep = "\t", dec = ".",
             row.names = TRUE, col.names = TRUE)

@@ -10,6 +10,7 @@ def raincloud(
     y,
     palette=["#4c72b0", "#c44e52"],
     ax=None,
+    alpha=.6,
     stripplot={},
     lines={},
     boxplot={},
@@ -91,7 +92,7 @@ def raincloud(
     paths.vertices[:, 0] -= 1.1
     vl["bodies"][0].set_edgecolor("k")
     vl["bodies"][0].set_facecolor(palette[0])
-    vl["bodies"][0].set_alpha(0.8)
+    vl["bodies"][0].set_alpha(alpha)
 
     # Right plot
     paths = vl["bodies"][1].get_paths()[0]
@@ -99,7 +100,7 @@ def raincloud(
     paths.vertices[:, 0] -= 0.9
     vl["bodies"][1].set_edgecolor("k")
     vl["bodies"][1].set_facecolor(palette[1])
-    vl["bodies"][1].set_alpha(0.8)
+    vl["bodies"][1].set_alpha(alpha)
 
     ax.set_xticks(range(len(df.columns)))
     ax.set_xticklabels(df.columns)
