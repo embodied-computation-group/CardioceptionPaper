@@ -9,18 +9,26 @@ def raincloud(
     x,
     y,
     palette=["#4c72b0", "#c44e52"],
+    levels=None,
     ax=None,
     alpha=.6,
+    show_outliers=True,
     stripplot={},
     lines={},
     boxplot={},
     violin={},
 ):
     """Repeated measure raincloud plot."""
+    if levels is None:
+        level1 = data[x].unique()[0]
+        level2 = data[x].unique()[1]
+    else:
+        level1, level2 = levels
+
     df = pd.DataFrame(
         {
-            data[x].unique()[0]: data[y][data[x] == data[x].unique()[0]].to_numpy(),
-            data[x].unique()[1]: data[y][data[x] == data[x].unique()[1]].to_numpy(),
+            level1: data[y][data[x] == level1].to_numpy(),
+            level2: data[y][data[x] == level2].to_numpy(),
         }
     )
 
@@ -53,8 +61,8 @@ def raincloud(
     #######
     for idx in df.index:
         ax.plot(
-            df_x_jitter.loc[idx, [data[x].unique()[0], data[x].unique()[1]]],
-            df.loc[idx, [data[x].unique()[0], data[x].unique()[1]]],
+            df_x_jitter.loc[idx, [level1, level2]],
+            df.loc[idx, [level1, level2]],
             color="grey",
             linewidth=0.5,
             linestyle="-",
@@ -79,8 +87,23 @@ def raincloud(
     ############
     # Violinplot
     ############
+    
+    # Outliers detection
+    if show_outliers is False:
+        violin_vec = []
+        for vec in [df[level1], df[level2]]:
+        
+            Q1 = vec.quantile(0.25)
+            Q3 =vec.quantile(0.75)
+            IQR = Q3 - Q1    #IQR is interquartile range. 
+
+            filter = (vec >= Q1 - 1.5 * IQR) & (vec <= Q3 + 1.5 *IQR)
+            violin_vec.append(vec.loc[filter])
+    else:
+        violin_vec = [df[level1], df[level2]]
+
     vl = ax.violinplot(
-        [df[data[x].unique()[0]], df[data[x].unique()[1]]],
+        violin_vec,
         showextrema=False,
         widths=0.5,
         **violin

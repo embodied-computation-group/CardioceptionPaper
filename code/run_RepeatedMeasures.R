@@ -39,7 +39,7 @@ library(ggmcmc)
 
 input = read.csv(file.path(dirname(getwd()), 'data/responsesRatings.txt'))
 
-input = filter(input, Session=="Del2")
+input = filter(input, Session=="Del1")
 subjects = unique(input$Subject)
 
 nR_S1_tot = list()
