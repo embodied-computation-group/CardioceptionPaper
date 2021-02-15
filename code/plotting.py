@@ -11,7 +11,7 @@ def raincloud(
     palette=["#4c72b0", "#c44e52"],
     levels=None,
     ax=None,
-    alpha=.6,
+    alpha=0.6,
     show_outliers=True,
     stripplot={},
     lines={},
@@ -87,27 +87,22 @@ def raincloud(
     ############
     # Violinplot
     ############
-    
+
     # Outliers detection
     if show_outliers is False:
         violin_vec = []
         for vec in [df[level1], df[level2]]:
-        
-            Q1 = vec.quantile(0.25)
-            Q3 =vec.quantile(0.75)
-            IQR = Q3 - Q1    #IQR is interquartile range. 
 
-            filter = (vec >= Q1 - 1.5 * IQR) & (vec <= Q3 + 1.5 *IQR)
+            Q1 = vec.quantile(0.25)
+            Q3 = vec.quantile(0.75)
+            IQR = Q3 - Q1  # IQR is interquartile range.
+
+            filter = (vec >= Q1 - 1.5 * IQR) & (vec <= Q3 + 1.5 * IQR)
             violin_vec.append(vec.loc[filter])
     else:
         violin_vec = [df[level1], df[level2]]
 
-    vl = ax.violinplot(
-        violin_vec,
-        showextrema=False,
-        widths=0.5,
-        **violin
-    )
+    vl = ax.violinplot(violin_vec, showextrema=False, widths=0.5, **violin)
 
     # Left plot
     paths = vl["bodies"][0].get_paths()[0]
