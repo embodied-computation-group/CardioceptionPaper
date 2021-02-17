@@ -109,11 +109,11 @@ df = rbind(data.frame(output[[1]]), data.frame(output[[2]]), data.frame(output[[
 
 
 
-write.table(stat, file = file.path(dirname(getwd()), 'data/jagsStats_Del1.txt'), append = FALSE, sep = "\t", dec = ".",
+write.table(stat, file = file.path(dirname(getwd()), 'data/jagsStats_Del2.txt'), append = FALSE, sep = "\t", dec = ".",
             row.names = TRUE, col.names = TRUE)
 
 jagsSamples <- mcmc.sample %>%
   filter(Parameter == "muBd_Condition1")
 
-write.table(jagsSamples, file = file.path(dirname(getwd()), 'data/jagsSamples_Del1.txt'), append = FALSE, sep = "\t", dec = ".",
+write.table(jagsSamples, file = file.path(dirname(getwd()), 'data/jagsSamples_Del2.txt'), append = FALSE, sep = "\t", dec = ".",
             row.names = TRUE, col.names = TRUE)
