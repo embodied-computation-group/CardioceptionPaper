@@ -1,0 +1,15 @@
+name: cardioception
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - numpy
+  - pip
+  - pip:
+    - systole
+    - seaborn
+    - pandas
+    - matplotlib
+    - mne
+    - scipy
+    - git+https://github.com/LegrandNico/metadPy.git
