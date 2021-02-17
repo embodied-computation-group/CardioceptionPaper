@@ -2,7 +2,8 @@
 
 This repository contain data, code, figures and HTML quality reports supporting the results presented in the cardiac interoception (cardioception) method paper.
 
->Legrand, N., Nikolova, N., Correa, C., Brændholt, M.,Stuckert, A., Kildahl, N., Vejlø, M., Fardo, F., Allen, M. (2021) Measuring the Accuracy and Precision of Interoceptive Beliefs: A Novel Psychometric Bayesian Approach.
+>Legrand, N., Nikolova, N., Correa, C., Brændholt, M.,Stuckert, A., Kildahl, N., Vejlø, M., Fardo, F., Allen, M. (2021). The heart rate discrimination task: a psychophysical method to estimate the accuracy and precision of interoceptive beliefs.
+
 ***
 ## Data
 
