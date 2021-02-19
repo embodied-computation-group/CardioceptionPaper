@@ -40,10 +40,10 @@ Raw and summarized data are stored in the `data` folder. The `raw` folder contai
 
 ### Notebooks
 
-The following notebook can be used to go through the whole analysis pipeline. The figures, or the figure components, are generated along the way. You can either inspect the notebooks using the *nbviewer* badge or run the entire repository interactively using  [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/embodied-computation-group/CardioceptionPaper/master).
+The following notebook can be used to go through the whole analysis pipeline. The figures, or the figure components, are generated along the way. You can either inspect the notebooks using the *nbviewer* badge or run the entire repository interactively using  [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/embodied-computation-group/CardioceptionPaper/main).
 
 #### Analysis
- * `1-Preprocess_Demographics.ipynb` [![View the notebook](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.jupyter.org/github/embodied-computation-group/CardioceptionPaper/blob/main/code/1-Preprocess_Demographics.ipynb?flush_cache=true) Contains basic files import and summary. Demographics reports
+ * `1-Preprocess_Demographics.ipynb` [![View the notebook](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.jupyter.org/github/embodied-computation-group/CardioceptionPaper/blob/main/code/1-Preprocess-Demographics.ipynb?flush_cache=true) Contains basic files import and summary. Demographics reports
 
  * `2-Psychophysics.ipynb` [![View the notebook](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.jupyter.org/github/embodied-computation-group/CardioceptionPaper/blob/main/code/2-Psychophysics.ipynb?flush_cache=true) Psychometric functions parameter analysis using Psi or post-hoc Bayesian estimates.
 
